@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.UserInfoListActivity">
+        android:theme="@style/Theme.UserInfoListActivity"
+        android:usesCleartextTraffic="true">
         <activity android:name=".PhotosActivity"></activity>
         <activity
             android:name=".UserListActivity"

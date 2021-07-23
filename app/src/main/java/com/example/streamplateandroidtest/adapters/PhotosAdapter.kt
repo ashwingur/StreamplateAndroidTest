@@ -17,13 +17,15 @@ class PhotosAdapter(): RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
     private lateinit var listener : OnItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotosAdapter.ViewHolder {
-        val v: View = LayoutInflater.from(parent.context).inflate(R.layout.userlist_item, parent, false)
+        val v: View = LayoutInflater.from(parent.context).inflate(R.layout.photos_item, parent, false)
         return ViewHolder(v, listener)
     }
 
     override fun onBindViewHolder(holder: PhotosAdapter.ViewHolder, position: Int) {
         // Insert image into imageview with Glide library
-        Glide.with(holder.itemView).load(photos[position].thumbnailUrl).into(holder.thumbnail)
+        Glide.with(holder.itemView.context)
+            .load(photos[position].thumbnailUrl + ".png")
+            .into(holder.thumbnail)
     }
 
     override fun getItemCount(): Int {
