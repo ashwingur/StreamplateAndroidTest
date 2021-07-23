@@ -10,11 +10,13 @@ import com.example.streamplateandroidtest.models.User
 
 class UserListAdapter(): RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
 
-    lateinit var users: List<User>
+    var users: List<User> = mutableListOf<User>()
+    private lateinit var listener : OnItemClickListener
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserListAdapter.ViewHolder {
         val v: View = LayoutInflater.from(parent.context).inflate(R.layout.userlist_item, parent, false)
-        return ViewHolder(v)
+        return ViewHolder(v, listener)
     }
 
     override fun onBindViewHolder(holder: UserListAdapter.ViewHolder, position: Int) {
@@ -27,9 +29,23 @@ class UserListAdapter(): RecyclerView.Adapter<UserListAdapter.ViewHolder>() {
         return users.size
     }
 
-    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class ViewHolder(itemView: View, listener: OnItemClickListener) : RecyclerView.ViewHolder(itemView) {
         val name: TextView = itemView.findViewById(R.id.user_name_tv)
         val email: TextView = itemView.findViewById(R.id.user_email_tv)
         val phone: TextView = itemView.findViewById(R.id.user_phone_tv)
+
+        init {
+            itemView.setOnClickListener{
+                listener.onItemClick(adapterPosition)
+            }
+        }
+    }
+
+    interface OnItemClickListener{
+        fun onItemClick(position: Int)
+    }
+
+    fun setOnItemClickListener(listener: OnItemClickListener){
+        this.listener = listener
     }
 }
