@@ -1,4 +1,4 @@
-package com.example.userinfolistactivity.models
+package com.example.streamplateandroidtest.models
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

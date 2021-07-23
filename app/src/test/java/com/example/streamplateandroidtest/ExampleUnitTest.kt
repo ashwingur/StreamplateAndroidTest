@@ -1,4 +1,4 @@
-package com.example.userinfolistactivity
+package com.example.streamplateandroidtest
 
 import org.junit.Test
 

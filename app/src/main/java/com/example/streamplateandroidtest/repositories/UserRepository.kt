@@ -1,8 +1,8 @@
-package com.example.userinfolistactivity.repositories
+package com.example.streamplateandroidtest.repositories
 
 import androidx.lifecycle.LiveData
-import com.example.userinfolistactivity.api.RetrofitBuilder
-import com.example.userinfolistactivity.models.User
+import com.example.streamplateandroidtest.api.RetrofitBuilder
+import com.example.streamplateandroidtest.models.User
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main

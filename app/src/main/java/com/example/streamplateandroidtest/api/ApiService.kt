@@ -1,7 +1,7 @@
-package com.example.userinfolistactivity.api
+package com.example.streamplateandroidtest.api
 
-import com.example.userinfolistactivity.models.Photo
-import com.example.userinfolistactivity.models.User
+import com.example.streamplateandroidtest.models.Photo
+import com.example.streamplateandroidtest.models.User
 import retrofit2.http.GET
 
 interface ApiService {

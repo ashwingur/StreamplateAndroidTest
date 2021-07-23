@@ -1,4 +1,4 @@
-package com.example.userinfolistactivity.api
+package com.example.streamplateandroidtest.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
