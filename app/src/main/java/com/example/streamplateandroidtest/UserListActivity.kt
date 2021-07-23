@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.streamplateandroidtest.adapters.UserListAdapter
 import com.example.streamplateandroidtest.databinding.ActivityUserlistBinding
@@ -41,7 +42,7 @@ class UserListActivity : AppCompatActivity() {
         adapter.setOnItemClickListener(object : UserListAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
                 val intent = Intent(this@UserListActivity, PhotosActivity::class.java)
-                intent.putExtra(PhotosActivityConstants.EXTRA_ID, position)
+                intent.putExtra(PhotosActivityConstants.EXTRA_ID, viewModel.users.value?.get(position)?.id)
                 startActivity(intent)
             }
         })
