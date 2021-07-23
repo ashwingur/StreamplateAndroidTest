@@ -16,9 +16,12 @@ class UserListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         title = "User Details"
+        initViewModel()
 
+    }
+
+    fun initViewModel(){
         viewModel = ViewModelProvider(this).get(UserListViewModel::class.java)
-
         viewModel.users.observe(this, Observer {
             println("DEBUG: ${it}")
         })
