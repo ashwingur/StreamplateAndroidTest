@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:id="@+id/userlist_rv"
-        tools:listitem="@layout/userlist_item"/>
+        tools:listitem="@layout/userlist_item"
+        android:layout_margin="4dp"/>
 
 </RelativeLayout>
