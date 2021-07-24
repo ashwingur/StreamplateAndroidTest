@@ -24,6 +24,7 @@ class PhotosActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPhotosBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        title = "Photos"
 
 
         initViewModel()
@@ -45,12 +46,13 @@ class PhotosActivity : AppCompatActivity() {
         binding.photosRv.adapter = adapter
         adapter.setOnItemClickListener(object : PhotosAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
-                Toast.makeText(this@PhotosActivity, "$position", Toast.LENGTH_SHORT).show()
-//                val intent = Intent(this@UserListActivity, PhotosActivity::class.java)
-//                intent.putExtra(PhotosActivityConstants.EXTRA_ID, viewModel.users.value?.get(position)?.id)
-//                startActivity(intent)
+                val intent = Intent(this@PhotosActivity, FullPhotoActivity::class.java)
+                intent.putExtra(FullPhotoActivityConstants.EXTRA_NAME, viewModel.photos.value?.get(position)?.title)
+                intent.putExtra(FullPhotoActivityConstants.EXTRA_IMG_URL, viewModel.photos.value?.get(position)?.url)
+                startActivity(intent)
             }
         })
+        // Sets the ID which triggers an api request to be made and the photos are retrieved
         viewModel.setPhotoId(intent.extras!!.getInt(PhotosActivityConstants.EXTRA_ID))
     }
 

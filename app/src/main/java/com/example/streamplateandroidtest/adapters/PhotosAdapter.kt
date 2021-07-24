@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.streamplateandroidtest.R
 import com.example.streamplateandroidtest.models.Photo
 import com.example.streamplateandroidtest.models.User
+import com.squareup.picasso.Picasso
 
 class PhotosAdapter(): RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
 
@@ -22,9 +23,9 @@ class PhotosAdapter(): RecyclerView.Adapter<PhotosAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: PhotosAdapter.ViewHolder, position: Int) {
-        // Insert image into imageview with Glide library
-        Glide.with(holder.itemView.context)
-            .load(photos[position].thumbnailUrl + ".png")
+        // Insert image into imageview with Picasso library
+        Picasso.get()
+            .load(photos[position].thumbnailUrl)
             .into(holder.thumbnail)
     }
 
