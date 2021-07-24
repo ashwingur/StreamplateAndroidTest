@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.streamplateandroidtest.adapters.PhotosAdapter
+import com.example.streamplateandroidtest.adapters.PhotosItemDecoration
 import com.example.streamplateandroidtest.databinding.ActivityPhotosBinding
 import com.example.streamplateandroidtest.viewmodels.PhotosViewModel
 import com.example.streamplateandroidtest.utils.*
@@ -27,7 +28,7 @@ class PhotosActivity : AppCompatActivity() {
         initViewModel()
         initRecyclerView()
 
-        val col = calculateNoOfColumns(this, pixelsToDp(150f,this))
+        val col = calculateNoOfColumns(this, 79f)
 
         Toast.makeText(this, "${col}", Toast.LENGTH_SHORT).show()
 
@@ -43,7 +44,8 @@ class PhotosActivity : AppCompatActivity() {
 
     private fun initRecyclerView(){
         binding.photosRv.layoutManager = GridLayoutManager(this
-            , calculateNoOfColumns(this, pixelsToDp(450f,this)))
+            , calculateNoOfColumns(this, 79f) - 1)
+        binding.photosRv.addItemDecoration(PhotosItemDecoration(4))
         binding.photosRv.adapter = adapter
         adapter.setOnItemClickListener(object : PhotosAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
@@ -60,7 +62,7 @@ class PhotosActivity : AppCompatActivity() {
         super.onConfigurationChanged(newConfig)
         // On screen orientation change update the grid layout columns
         binding.photosRv.layoutManager = GridLayoutManager(this
-            , calculateNoOfColumns(this, pixelsToDp(450f,this)))
+            , calculateNoOfColumns(this, 79f) - 1)
     }
 }
 
