@@ -1,20 +1,18 @@
 package com.example.streamplateandroidtest.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
 import com.example.streamplateandroidtest.models.Photo
 import com.example.streamplateandroidtest.repositories.PhotoRepository
 
-class PhotosViewModel : ViewModel() {
+class PhotosViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _id: MutableLiveData<Int> = MutableLiveData()
 
     // The switch map is observing _id, and when it is changed the livedata photos object updates as well
     val photos: LiveData<List<Photo>> = Transformations
         .switchMap(_id){ id ->
-            PhotoRepository.getPhotosById(id)
+            PhotoRepository.getPhotosById(id, application)
         }
 
     fun setPhotoId(id: Int){

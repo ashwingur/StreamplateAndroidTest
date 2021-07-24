@@ -12,8 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UserInfoListActivity"
         android:usesCleartextTraffic="true">
-        <activity android:name=".PhotosActivity"
-            android:configChanges="orientation|screenSize"></activity>
+        <activity android:name=".FullPhotoActivity"></activity>
+        <activity
+            android:name=".PhotosActivity"
+            android:configChanges="orientation|screenSize" />
         <activity
             android:name=".UserListActivity"
             android:configChanges="orientation|screenSize">

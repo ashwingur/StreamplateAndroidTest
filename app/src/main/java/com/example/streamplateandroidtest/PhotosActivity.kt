@@ -65,5 +65,5 @@ class PhotosActivity : AppCompatActivity() {
 
 object PhotosActivityConstants {
     const val EXTRA_ID = "com.example.streamplateandroidtest.EXTRA_ID"
-    const val THUMBNAIL_SIZE: Float = 79f
+    const val THUMBNAIL_SIZE: Float = 79f // In DPI
 }

@@ -1,5 +1,7 @@
 package com.example.streamplateandroidtest.repositories
 
+import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import com.example.streamplateandroidtest.api.RetrofitBuilder
 import com.example.streamplateandroidtest.models.Photo
@@ -10,22 +12,29 @@ object PhotoRepository {
 
     var job: CompletableJob? = null
 
-    fun getPhotosById(id: Int): LiveData<List<Photo>> {
+    fun getPhotosById(id: Int, context: Context): LiveData<List<Photo>> {
         job = Job()
         return object: LiveData<List<Photo>>(){
             override fun onActive() {
                 super.onActive()
                 job?.let {
                     CoroutineScope(IO + it).launch {
-                        val photos = RetrofitBuilder.apiService.getPhotos()
-                        var filtered_photos = mutableListOf<Photo>()
-                        for (photo in photos){
-                            if (photo.albumId == id){
-                                filtered_photos.add(photo)
+                        val response = RetrofitBuilder.apiService.getPhotos()
+                        if (response.code() == 200) {
+                            val filteredPhotos = mutableListOf<Photo>()
+                            val result: List<Photo>? = response.body()
+                            for (photo in result!!) {
+                                if (photo.albumId == id) {
+                                    filteredPhotos.add(photo)
+                                }
                             }
-                        }
-                        withContext(Dispatchers.Main){
-                            value = filtered_photos
+                            withContext(Dispatchers.Main) {
+                                value = filteredPhotos
+                            }
+                        } else {
+                            withContext(Dispatchers.Main){
+                                Toast.makeText(context, "Error in retrieving photos [Status: ${response.code()}]", Toast.LENGTH_LONG).show()
+                            }
                             it.complete()
                         }
                     }
