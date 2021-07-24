@@ -1,18 +1,17 @@
 package com.example.streamplateandroidtest
 
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.streamplateandroidtest.adapters.PhotosAdapter
-import com.example.streamplateandroidtest.adapters.UserListAdapter
 import com.example.streamplateandroidtest.databinding.ActivityPhotosBinding
 import com.example.streamplateandroidtest.viewmodels.PhotosViewModel
-import com.example.streamplateandroidtest.viewmodels.UserListViewModel
+import com.example.streamplateandroidtest.utils.*
 
 class PhotosActivity : AppCompatActivity() {
 
@@ -28,9 +27,13 @@ class PhotosActivity : AppCompatActivity() {
         initViewModel()
         initRecyclerView()
 
+        val col = calculateNoOfColumns(this, pixelsToDp(150f,this))
+
+        Toast.makeText(this, "${col}", Toast.LENGTH_SHORT).show()
+
     }
 
-    fun initViewModel(){
+    private fun initViewModel(){
         viewModel = ViewModelProvider(this).get(PhotosViewModel::class.java)
         viewModel.photos.observe(this, Observer {
             adapter.photos = it
@@ -38,8 +41,9 @@ class PhotosActivity : AppCompatActivity() {
         })
     }
 
-    fun initRecyclerView(){
-        binding.photosRv.layoutManager = GridLayoutManager(this,2)
+    private fun initRecyclerView(){
+        binding.photosRv.layoutManager = GridLayoutManager(this
+            , calculateNoOfColumns(this, pixelsToDp(450f,this)))
         binding.photosRv.adapter = adapter
         adapter.setOnItemClickListener(object : PhotosAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
@@ -51,7 +55,15 @@ class PhotosActivity : AppCompatActivity() {
         })
         viewModel.setPhotoId(intent.extras!!.getInt(PhotosActivityConstants.EXTRA_ID))
     }
+
+    override fun onConfigurationChanged(newConfig: Configuration) {
+        super.onConfigurationChanged(newConfig)
+        // On screen orientation change update the grid layout columns
+        binding.photosRv.layoutManager = GridLayoutManager(this
+            , calculateNoOfColumns(this, pixelsToDp(450f,this)))
+    }
 }
+
 
 object PhotosActivityConstants {
     const val EXTRA_ID = "com.example.streamplateandroidtest.EXTRA_ID"
