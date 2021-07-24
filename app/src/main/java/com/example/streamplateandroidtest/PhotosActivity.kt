@@ -25,13 +25,9 @@ class PhotosActivity : AppCompatActivity() {
         binding = ActivityPhotosBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         initViewModel()
         initRecyclerView()
-
-        val col = calculateNoOfColumns(this, 79f)
-
-        Toast.makeText(this, "${col}", Toast.LENGTH_SHORT).show()
-
     }
 
     private fun initViewModel(){
@@ -44,7 +40,7 @@ class PhotosActivity : AppCompatActivity() {
 
     private fun initRecyclerView(){
         binding.photosRv.layoutManager = GridLayoutManager(this
-            , calculateNoOfColumns(this, 79f) - 1)
+            , calculateNoOfColumns(this, PhotosActivityConstants.THUMBNAIL_SIZE) - 1) // -1 to prevent photos being cropped
         binding.photosRv.addItemDecoration(PhotosItemDecoration(4))
         binding.photosRv.adapter = adapter
         adapter.setOnItemClickListener(object : PhotosAdapter.OnItemClickListener{
@@ -62,11 +58,12 @@ class PhotosActivity : AppCompatActivity() {
         super.onConfigurationChanged(newConfig)
         // On screen orientation change update the grid layout columns
         binding.photosRv.layoutManager = GridLayoutManager(this
-            , calculateNoOfColumns(this, 79f) - 1)
+            , calculateNoOfColumns(this, PhotosActivityConstants.THUMBNAIL_SIZE) - 1)
     }
 }
 
 
 object PhotosActivityConstants {
     const val EXTRA_ID = "com.example.streamplateandroidtest.EXTRA_ID"
+    const val THUMBNAIL_SIZE: Float = 79f
 }
