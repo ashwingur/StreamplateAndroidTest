@@ -12,6 +12,7 @@ object PhotoRepository {
 
     var job: CompletableJob? = null
 
+    // Similar code as the user repository, but also filters the photos that have a certain albumID
     fun getPhotosById(id: Int, context: Context): LiveData<List<Photo>> {
         job = Job()
         return object: LiveData<List<Photo>>(){

@@ -28,19 +28,21 @@ class UserListActivity : AppCompatActivity() {
         initRecyclerView()
     }
 
-    fun initViewModel(){
+    private fun initViewModel(){
         viewModel = ViewModelProvider(this).get(UserListViewModel::class.java)
         viewModel.users.observe(this, Observer {
+            // Update recyclerview when the data changes
             adapter.users = it
             adapter.notifyDataSetChanged()
         })
     }
 
-    fun initRecyclerView(){
+    private fun initRecyclerView(){
         binding.userlistRv.layoutManager = LinearLayoutManager(this)
         binding.userlistRv.adapter = adapter
         adapter.setOnItemClickListener(object : UserListAdapter.OnItemClickListener{
             override fun onItemClick(position: Int) {
+                // Launches a new activity that displays all the photos in the selected user's album
                 val intent = Intent(this@UserListActivity, PhotosActivity::class.java)
                 intent.putExtra(PhotosActivityConstants.EXTRA_ID, viewModel.users.value?.get(position)?.id)
                 startActivity(intent)
