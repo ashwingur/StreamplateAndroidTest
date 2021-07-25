@@ -20,6 +20,7 @@
         <activity
             android:name=".PhotosActivity"
             android:configChanges="orientation"
+            android:launchMode="singleTop"
             android:parentActivityName=".UserListActivity"/>
         <activity
             android:name=".UserListActivity"

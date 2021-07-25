@@ -53,7 +53,9 @@ class PhotosActivity : AppCompatActivity() {
             }
         })
         // Sets the ID which triggers an api request to be made and the photos are retrieved
-        viewModel.setPhotoId(intent.extras!!.getInt(PhotosActivityConstants.EXTRA_ID))
+        if (intent.hasExtra(PhotosActivityConstants.EXTRA_ID)){
+            viewModel.setPhotoId(intent.extras!!.getInt(PhotosActivityConstants.EXTRA_ID))
+        }
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
