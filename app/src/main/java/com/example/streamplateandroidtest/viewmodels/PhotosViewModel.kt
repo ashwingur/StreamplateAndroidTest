@@ -16,6 +16,8 @@ class PhotosViewModel(application: Application) : AndroidViewModel(application) 
         }
 
     fun setPhotoId(id: Int){
+        // If the id is the same nothing happens, otherwise update it which causes the photo livedata
+        // to update as well
         if (_id.value == id){
             return
         }
